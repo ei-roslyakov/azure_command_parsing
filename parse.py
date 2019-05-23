@@ -3,10 +3,10 @@ import textfsm
 from tabulate import tabulate
 
 template = sys.argv[1]
-output_file = sys.argv[2]
+input_file = sys.argv[2]
 
 f = open(template)
-output = open(output_file).read()
+output = open(input_file).read()
 
 re_table = textfsm.TextFSM(f)
 
