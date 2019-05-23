@@ -1,0 +1,4 @@
+#project files
+node_modules
+cached_uglify
+.idea
