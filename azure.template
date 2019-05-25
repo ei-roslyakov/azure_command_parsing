@@ -5,4 +5,4 @@ Value Name (\S+)
 Value Signed (True|False)
 
 Start
-  ^${Time} ${Timezone} ${WeekDay} ${Month} ${MonthDay} ${Year} -> Record
+  ^${CreatedTime} ${Digest} ${LastUpdateTime} ${Name} ${Signed} -> Record
