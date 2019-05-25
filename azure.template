@@ -1,0 +1,8 @@
+Value CreatedTime (\S+)
+Value Digest (\S+)
+Value LastUpdateTime (\S+)
+Value Name (\S+)
+
+Start
+
+^CreatedTime: ${CreatedTime} Digest: ${Digest} LastUpdateTime: ${LastUpdateTime} Name: ${Name} -> Record
