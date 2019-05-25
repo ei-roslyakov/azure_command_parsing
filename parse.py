@@ -1,16 +1,13 @@
 import sys
 import textfsm
-from tabulate import tabulate
 
 template = sys.argv[1]
-input_file = sys.argv[2]
+raw_text_data = sys.argv[2]
 
-f = open(template)
-output = open(input_file).read()
+re_table = textfsm.TextFSM(template)
+data = re_table.ParseText(raw_text_data)
 
-re_table = textfsm.TextFSM(f)
+print(', '.join(re_table.header))
 
-header = re_table.header
-result = re_table.ParseText(output)
-
-print(tabulate(result, headers=header))
+for row in data:
+    print(', '.join(row))

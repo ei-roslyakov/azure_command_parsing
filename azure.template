@@ -1,8 +1,8 @@
-Value CreatedTime (\S+)
+Value CreatedTime (....-..-.....:..:...........)
 Value Digest (\S+)
-Value LastUpdateTime (\S+)
+Value LastUpdateTime (....-..-.....:..:...........)
 Value Name (\S+)
+Value Signed (True|False)
 
 Start
-
-^CreatedTime: ${CreatedTime} Digest: ${Digest} LastUpdateTime: ${LastUpdateTime} Name: ${Name} -> Record
+  ^${Time} ${Timezone} ${WeekDay} ${Month} ${MonthDay} ${Year} -> Record
