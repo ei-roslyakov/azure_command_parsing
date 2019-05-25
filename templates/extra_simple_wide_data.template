@@ -1,0 +1,4 @@
+Value whole_row (.*)
+
+Start
+  ^${whole_row} -> Record
