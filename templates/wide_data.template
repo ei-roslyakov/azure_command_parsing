@@ -1,8 +1,8 @@
-Value CreatedTime (....-..-.....:..:...........)
-Value Digest (\S+)
-Value LastUpdateTime (....-..-.....:..:...........)
-Value Name (\S+)
-Value Signed (True|False)
+Value created_time ([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]*[A-Za-z]*)
+Value digest (\w+:\w+)
+Value last_update_time ([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]*[A-Za-z]*)
+Value name (.*)
+Value signed (True|False)
 
 Start
-  ^${CreatedTime} ${Digest} ${LastUpdateTime} ${Name} ${Signed} -> Record
+  ^${created_time}\s+${digest}\s+${last_update_time}\s+${name}\s+${signed}.* -> Record
