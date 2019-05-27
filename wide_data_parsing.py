@@ -14,6 +14,10 @@ def get_text_from_file(file_name):
         return input_file.read()        
 
 
+def sort_pole(elem):
+    return elem[2]
+
+
 def main():
     data_to_be_parsed = get_text_from_file(DATA_FILE_NAME)
     template_text = get_text_from_file(TEMPLATE_FILE_NAME)
@@ -23,6 +27,7 @@ def main():
     
     parser = textfsm.TextFSM(template_io)
     parsing_result = parser.ParseText(data_to_be_parsed)
+    parsing_result.sort(key=sort_pole)
     print("parsing_result:\n{}".format(parsing_result))
     # table_to_be_printed = terminaltables.AsciiTable(
     #     [parser.header] +
@@ -30,7 +35,9 @@ def main():
     # )
     
     # print("Parsed Data:\n{}".format(table_to_be_printed.table))
-
+    # for item in parsing_result:
+    #     print(item)
+    #     print("*************")
 
 main()
 
