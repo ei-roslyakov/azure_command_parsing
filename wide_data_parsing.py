@@ -2,8 +2,8 @@ import codecs
 import io
 import sys
 import textfsm
-from dateutil import parser
 import terminaltables
+import datetime
 
 
 AMOUNT_REMAINING = int(sys.argv[1]) * -1
@@ -40,10 +40,17 @@ def main():
     parsing_result = parser.ParseText(data_to_be_parsed)
     parsing_result.sort(key=sort_pole)
     # print("parsing_result:\n{}".format(parsing_result[:AMOUNT_REMAINING]))
+    # datetime.datetime.strptime(parsing_result[:AMOUNT_REMAINING], '%Y-%m-%d %H:%M:%S.%f')
 
-    for item in parsing_result[:AMOUNT_REMAINING]:
-        print(item[0], item[3])
+    print("parsing_result:\n{}".format(parsing_result[:AMOUNT_REMAINING]))
 
+    # for item in parsing_result:
+    #     datetime.datetime.strptime(item[:AMOUNT_REMAINING], '%Y-%m-%d %H:%M:%S.%f')
+    #     print(item[:AMOUNT_REMAINING])
+
+
+# for item in parsing_result[:AMOUNT_REMAINING]:
+    #     print(item[0], item[3])
 
     # print(AMOUNT_REMAINING)
     # table_to_be_printed = terminaltables.AsciiTable(
