@@ -3,21 +3,13 @@ import io
 import sys
 import textfsm
 import terminaltables
-import datetime
+from dateutil import parser
 
 
 AMOUNT_REMAINING = int(sys.argv[1]) * -1
 TEMPLATE_FILE_NAME = "./templates/wide_data.template"
 DATA_FILE_NAME = "./data/wide_data.txt"
-
-
-# def amount_remaning(AMOUNT_REMAINING):
-#     while True:
-#         if AMOUNT_REMAINING:
-#             return AMOUNT_REMAINING * -1
-#         else:
-#             AMOUNT_REMAINING = -5
-#             return AMOUNT_REMAINING
+# DATA_FILE_NAME = sys.stdin.read()
 
 
 def get_text_from_file(file_name):
@@ -36,32 +28,31 @@ def main():
     template_io = io.StringIO(template_text)
     template_io.seek(0)
     
-    parser = textfsm.TextFSM(template_io)
-    parsing_result = parser.ParseText(data_to_be_parsed)
-    parsing_result.sort(key=sort_pole)
-    # print("parsing_result:\n{}".format(parsing_result[:AMOUNT_REMAINING]))
-    # datetime.datetime.strptime(parsing_result[:AMOUNT_REMAINING], '%Y-%m-%d %H:%M:%S.%f')
+    parser_fsm = textfsm.TextFSM(template_io)
+    parsing_result = parser_fsm.ParseText(data_to_be_parsed)
+    new_wide_data = []
+    for item in parsing_result:
+        item[2] = parser.parse(item[2])
+        new_wide_data.append(item)
 
-    print("parsing_result:\n{}".format(parsing_result[:AMOUNT_REMAINING]))
+    new_wide_data.sort(key=sort_pole)
+    print("************************residual data************************")
+    for item in new_wide_data[AMOUNT_REMAINING:]:
+        print(item[0], item[3])
+    print("************************data to be deleted************************")
+    for item in new_wide_data[:AMOUNT_REMAINING]:
+        print(item[0], item[3])
+    print("\n")
+    user_decision = input("Press Y to continue deleting images ")
+    print("\n")
+    if user_decision == "Y":
+        for item in new_wide_data[:AMOUNT_REMAINING]:
+            print("Image has been deleted {} {}".format(item[0], item[3]))
 
-    # for item in parsing_result:
-    #     datetime.datetime.strptime(item[:AMOUNT_REMAINING], '%Y-%m-%d %H:%M:%S.%f')
-    #     print(item[:AMOUNT_REMAINING])
-
-
-# for item in parsing_result[:AMOUNT_REMAINING]:
-    #     print(item[0], item[3])
-
-    # print(AMOUNT_REMAINING)
     # table_to_be_printed = terminaltables.AsciiTable(
     #     [parser.header] +
     #     parsing_result
     # )
-    
-    # print("Parsed Data:\n{}".format(table_to_be_printed.table))
-    # for item in parsing_result:
-    #     print(item)
-    #     print("*************")
 
 
 main()
