@@ -8,8 +8,9 @@ from dateutil import parser
 
 AMOUNT_REMAINING = int(sys.argv[1]) * -1
 TEMPLATE_FILE_NAME = "./templates/wide_data.template"
-DATA_FILE_NAME = "./data/wide_data.txt"
-# DATA_FILE_NAME = sys.stdin.read()
+# DATA_FILE_NAME = "./data/wide_data.txt"
+DATA_FILE_NAME = sys.stdin.read()
+# DATA_FILE_NAME = input()
 
 
 def get_text_from_file(file_name):
@@ -22,9 +23,11 @@ def sort_pole(elem):
 
 
 def main():
-    data_to_be_parsed = get_text_from_file(DATA_FILE_NAME)
+    # data_to_be_parsed = get_text_from_file(DATA_FILE_NAME)
+    data_to_be_parsed = DATA_FILE_NAME
     template_text = get_text_from_file(TEMPLATE_FILE_NAME)
-    
+    # template_text = TEMPLATE_FILE_NAME
+
     template_io = io.StringIO(template_text)
     template_io.seek(0)
     
@@ -43,9 +46,10 @@ def main():
     for item in new_wide_data[:AMOUNT_REMAINING]:
         print(item[0], item[3])
     print("\n")
-    user_decision = input("Press Y to continue deleting images ")
+    # user_decision = sys.stdin.readline().rstrip()
+    # user_decision = str(raw_input("Press Y to continue deleting images "))
     print("\n")
-    if user_decision == "Y":
+    if user_decision == str("Y"):
         for item in new_wide_data[:AMOUNT_REMAINING]:
             print("Image has been deleted {} {}".format(item[0], item[3]))
 
@@ -55,4 +59,5 @@ def main():
     # )
 
 
-main()
+if __name__ == '__main__':
+    main()
