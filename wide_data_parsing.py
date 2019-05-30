@@ -39,19 +39,19 @@ def main():
         new_wide_data.append(item)
 
     new_wide_data.sort(key=sort_pole)
-    print("************************residual data************************")
-    for item in new_wide_data[AMOUNT_REMAINING:]:
-        print(item[0], item[3])
-    print("************************data to be deleted************************")
+    # print("************************residual data************************")
+    # for item in new_wide_data[AMOUNT_REMAINING:]:
+    #     print(item[0], item[3])
+    # print("************************data to be deleted************************")
     for item in new_wide_data[:AMOUNT_REMAINING]:
         print(item[0], item[3])
     print("\n")
     # user_decision = sys.stdin.readline().rstrip()
-    user_decision = str(input("Press Y to continue deleting images "))
-    print("\n")
-    if user_decision == str("Y"):
-        for item in new_wide_data[:AMOUNT_REMAINING]:
-            print("Image has been deleted {} {}".format(item[0], item[3]))
+    # user_decision = str(input("Press Y to continue deleting images "))
+    # print("\n")
+    # if user_decision == str("Y"):
+    #     for item in new_wide_data[:AMOUNT_REMAINING]:
+    #         print("Image has been deleted {} {}".format(item[0], item[3]))
 
     # table_to_be_printed = terminaltables.AsciiTable(
     #     [parser.header] +
