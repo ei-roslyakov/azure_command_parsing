@@ -12,7 +12,7 @@ DATA_FILE_NAME = sys.stdin.read()
 
 def get_text_from_file(file_name):
     with codecs.open(file_name, "r", "utf-8") as input_file:
-        return input_file.read()        
+        return input_file.read()
 
 
 def sort_pole(elem):
@@ -22,10 +22,8 @@ def sort_pole(elem):
 def main():
     data_to_be_parsed = DATA_FILE_NAME
     template_text = get_text_from_file(TEMPLATE_FILE_NAME)
-
     template_io = io.StringIO(template_text)
     template_io.seek(0)
-    
     parser_fsm = textfsm.TextFSM(template_io)
     parsing_result = parser_fsm.ParseText(data_to_be_parsed)
     new_wide_data = []
