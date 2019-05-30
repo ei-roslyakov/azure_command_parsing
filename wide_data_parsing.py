@@ -47,7 +47,7 @@ def main():
         print(item[0], item[3])
     print("\n")
     # user_decision = sys.stdin.readline().rstrip()
-    # user_decision = str(raw_input("Press Y to continue deleting images "))
+    user_decision = str(input("Press Y to continue deleting images "))
     print("\n")
     if user_decision == str("Y"):
         for item in new_wide_data[:AMOUNT_REMAINING]:
