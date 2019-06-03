@@ -4,10 +4,8 @@ import sys
 import textfsm
 from dateutil import parser
 
-
 AMOUNT_REMAINING = int(sys.argv[1]) * -1
 TEMPLATE_FILE_NAME = "./templates/wide_data.template"
-INPUT_DATA = sys.stdin.read()
 
 
 def get_text_from_file(file_name):
@@ -15,18 +13,26 @@ def get_text_from_file(file_name):
         return input_file.read()
 
 
+def create_stream_from_text_file(file_name):
+    template_text = get_text_from_file(file_name)
+    template_io = io.StringIO(template_text)
+    template_io.seek(0)
+
+    return template_io
+
+
 def sort_pole(elem):
     return elem[2]
 
 
 def main():
-    data_to_be_parsed = INPUT_DATA
-    template_text = get_text_from_file(TEMPLATE_FILE_NAME)
-    template_io = io.StringIO(template_text)
-    template_io.seek(0)
+    data_to_be_parsed = sys.stdin.read()
+    template_io = create_stream_from_text_file(TEMPLATE_FILE_NAME)
+
     parser_fsm = textfsm.TextFSM(template_io)
     parsing_result = parser_fsm.ParseText(data_to_be_parsed)
     new_wide_data = []
+
     for item in parsing_result:
         item[2] = parser.parse(item[2])
         new_wide_data.append(item)
