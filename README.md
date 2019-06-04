@@ -1,8 +1,12 @@
 # azure_command_parsing
-WBS
-- Принять данные на stdin или прочитать из файла
-- Распарсить табличку
-- Распарсить дату
-- Отсортировать в обратном порядке
-- Оставить только N новых
-- Выполнить команды, или напечатать их на stdout, по удалению старых имеджей (edited) 
+
+_The script for removing old files_
+
+_To use, you must transfer input data (stdin), as well as the parameter you need to specify the number of images that should be left (-q)_
+
+_Usage example:_
+
+* cat .\data\wide_data.txt | python .\wide_data_parsing.py -q 6 (Windows)
+* cat data/wide_data.txt | python3 wide_data_parsing.py -q 6 (Linux)
+
+_last 6 images will not be displayed_
