@@ -54,8 +54,8 @@ def parse_data():
 
 def main(data_to_be_sorted):
     amount_remaining = parse_command_line()
-    data_to_be_sorted.sort(key=sort_pole)
-    for item in data_to_be_sorted[:amount_remaining.q * -1]:
+    data_to_be_sorted.sort(key=sort_pole, reverse=True)
+    for item in data_to_be_sorted[abs(amount_remaining.q):]:
         print(item[INDEX_COLUMN_TIME_CREATE], item[INDEX_COLUMN_NAME])
 
 
