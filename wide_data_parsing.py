@@ -31,7 +31,7 @@ def sort_pole(elem):
 def parse_command_line():
     parsers = argparse.ArgumentParser()
     parsers.add_argument('-q',
-                         default=-5,
+                         default=5,
                          type=int)
 
     return parsers.parse_args()
