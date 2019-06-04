@@ -1,24 +1,29 @@
 import argparse
-import codecs
 import io
 import sys
-import textfsm
+
 from dateutil import parser
 
+import textfsm
 
-TEMPLATE_FILE_NAME = "./templates/wide_data.template"
+
+WIDE_DATA_PARSING_TEMPLATE = \
+    "Value created_time ([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]*[A-Za-z]*)\n" \
+    "Value digest (\w+:\w+)\n" \
+    "Value last_update_time ([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]*[A-Za-z]*)\n" \
+    "Value name (.*)\n" \
+    "Value signed (True|False)\n" \
+    "\n" \
+    "Start\n" \
+    "  ^${created_time}\s+${digest}\s+${last_update_time}\s+${name}\s+${signed}.* -> Record\n"
+
+
 INDEX_COLUMN_TIME_CREATE = 0
 INDEX_COLUMN_NAME = 3
 
 
-def get_text_from_file(file_name):
-    with codecs.open(file_name, "r", "utf-8") as input_file:
-        return input_file.read()
-
-
-def create_stream_from_text_file(file_name):
-    template_text = get_text_from_file(file_name)
-    template_io = io.StringIO(template_text)
+def create_io_from_string(value):
+    template_io = io.StringIO(value)
     template_io.seek(0)
 
     return template_io
@@ -30,16 +35,18 @@ def sort_pole(elem):
 
 def parse_command_line():
     parsers = argparse.ArgumentParser()
-    parsers.add_argument('-q',
-                         default=5,
-                         type=int)
+    parsers.add_argument(
+        "-q",
+        default=5,
+        type=int
+    )
 
     return parsers.parse_args()
 
 
 def parse_data():
     data_to_be_parsed = sys.stdin.read()
-    template_io = create_stream_from_text_file(TEMPLATE_FILE_NAME)
+    template_io = create_io_from_string(WIDE_DATA_PARSING_TEMPLATE)
 
     parser_fsm = textfsm.TextFSM(template_io)
     parsing_result = parser_fsm.ParseText(data_to_be_parsed)
@@ -59,5 +66,5 @@ def main(data_to_be_sorted):
         print(item[INDEX_COLUMN_TIME_CREATE], item[INDEX_COLUMN_NAME])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(parse_data())
