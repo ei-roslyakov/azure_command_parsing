@@ -15,7 +15,7 @@ WIDE_DATA_PARSING_TEMPLATE = \
     "Value signed (True|False)\n" \
     "\n" \
     "Start\n" \
-    "  ^${created_time}\s+${digest}\s+${last_update_time}\s+${name}\s+${signed}.* -> Record\n"
+    "  ^${created_time}\s+${digest}\s+${last_update_time}\s+${name}\s+${signed}.* -> Record\n"  # noqa
 
 
 INDEX_COLUMN_TIME_CREATE = 0
