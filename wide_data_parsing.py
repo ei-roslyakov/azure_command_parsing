@@ -62,8 +62,41 @@ def parse_data():
 def main(data_to_be_sorted):
     amount_remaining = parse_command_line()
     data_to_be_sorted.sort(key=sort_pole, reverse=True)
+
+    to_be_delete = []
+    no_deleted = []
+
     for item in data_to_be_sorted[abs(amount_remaining.q):]:
+        to_be_delete.append(item)
+
+    for item in data_to_be_sorted[:abs(amount_remaining.q)]:
+        no_deleted.append(item)
+
+    del_image = []
+    untag_image = []
+
+    for item in to_be_delete:
+        for value in no_deleted:
+            if item[1] == value[1]:
+                untag_image.append(item)
+            else:
+                del_image.append(item)
+            break
+
+    print("")
+    print("DELETED")
+
+    for item in del_image:
         print(item[INDEX_COLUMN_TIME_CREATE], item[INDEX_COLUMN_NAME])
+    print("")
+    print("NO_DELETED")
+
+    for item in untag_image:
+        print(item[INDEX_COLUMN_TIME_CREATE], item[INDEX_COLUMN_NAME])
+
+    # for item in data_to_be_sorted[abs(amount_remaining.q):]:
+    #     with open("del_image.txt", "a+") as file_to_write:
+    #         file_to_write.write(str(item[INDEX_COLUMN_TIME_CREATE] + " " + item[INDEX_COLUMN_NAME] + '\n'))
 
 
 if __name__ == "__main__":
