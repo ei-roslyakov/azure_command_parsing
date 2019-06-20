@@ -83,20 +83,19 @@ def main(data_to_be_sorted):
                 del_image.append(item)
             break
 
-    print("")
-    print("DELETED")
-
     for item in del_image:
-        print(item[INDEX_COLUMN_TIME_CREATE], item[INDEX_COLUMN_NAME])
-    print("")
-    print("NO_DELETED")
+        create_time = (item[INDEX_COLUMN_TIME_CREATE])
+        image_name = (item[INDEX_COLUMN_NAME])
+        data_to_write = "{} {}\n".format(create_time, image_name)
+        with open("del_image.txt", "a+") as file_to_write:
+            file_to_write.write(data_to_write)
 
     for item in untag_image:
-        print(item[INDEX_COLUMN_TIME_CREATE], item[INDEX_COLUMN_NAME])
-
-    # for item in data_to_be_sorted[abs(amount_remaining.q):]:
-    #     with open("del_image.txt", "a+") as file_to_write:
-    #         file_to_write.write(str(item[INDEX_COLUMN_TIME_CREATE] + " " + item[INDEX_COLUMN_NAME] + '\n'))
+        create_time = (item[INDEX_COLUMN_TIME_CREATE])
+        image_name = (item[INDEX_COLUMN_NAME])
+        data_to_write = "{} {}\n".format(create_time, image_name)
+        with open("untag_image.txt", "a+") as file_to_write:
+            file_to_write.write(data_to_write)
 
 
 if __name__ == "__main__":
