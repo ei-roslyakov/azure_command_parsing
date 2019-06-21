@@ -79,6 +79,7 @@ def main(data_to_be_sorted):
 
     untagged_images = set()
     want_wret_to_del = {}
+    already_deleted_images = set()
     for element_to_untag in no_deleted:
         for element_to_delete in to_be_delete:
 
@@ -90,9 +91,11 @@ def main(data_to_be_sorted):
             hash_element_to_untag = str(element_to_untag[1]).strip().lower()
 
             if hash_element_to_delete == hash_element_to_untag:
-                with open("untag_image.txt", "a+") as file_to_write:
-                    file_to_write.write(data_to_write)
-                    untagged_images.add(hash_element_to_untag)
+                if hash_element_to_delete not in already_deleted_images:
+                    with open("untag_image.txt", "a+") as file_to_write:
+                        file_to_write.write(data_to_write)
+                        untagged_images.add(hash_element_to_untag)
+                        already_deleted_images.add(hash_element_to_delete)
 
             elif hash_element_to_delete not in untagged_images:
                 want_wret_to_del[hash_element_to_delete] = data_to_write
