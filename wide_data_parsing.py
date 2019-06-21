@@ -72,30 +72,18 @@ def main(data_to_be_sorted):
     for item in data_to_be_sorted[:abs(amount_remaining.q)]:
         no_deleted.append(item)
 
-    del_image = []
-    untag_image = []
-
     for item in to_be_delete:
         for value in no_deleted:
+            create_time = (item[INDEX_COLUMN_TIME_CREATE])
+            image_name = (item[INDEX_COLUMN_NAME])
+            data_to_write = "{} {}\n".format(create_time, image_name)
             if item[1] == value[1]:
-                untag_image.append(item)
+                with open("untag_image.txt", "a+") as file_to_write:
+                    file_to_write.write(data_to_write)
             else:
-                del_image.append(item)
+                with open("del_image.txt", "a+") as file_to_write:
+                    file_to_write.write(data_to_write)
             break
-
-    for item in del_image:
-        create_time = (item[INDEX_COLUMN_TIME_CREATE])
-        image_name = (item[INDEX_COLUMN_NAME])
-        data_to_write = "{} {}\n".format(create_time, image_name)
-        with open("del_image.txt", "a+") as file_to_write:
-            file_to_write.write(data_to_write)
-
-    for item in untag_image:
-        create_time = (item[INDEX_COLUMN_TIME_CREATE])
-        image_name = (item[INDEX_COLUMN_NAME])
-        data_to_write = "{} {}\n".format(create_time, image_name)
-        with open("untag_image.txt", "a+") as file_to_write:
-            file_to_write.write(data_to_write)
 
 
 if __name__ == "__main__":
