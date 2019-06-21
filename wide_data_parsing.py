@@ -77,18 +77,32 @@ def main(data_to_be_sorted):
     for item in data_to_be_sorted[:abs(amount_remaining.q)]:
         no_deleted.append(item)
 
-    for element_to_delete in to_be_delete:
-        for element_to_untag in no_deleted:
-            create_time = (element_to_delete[INDEX_COLUMN_TIME_CREATE])
-            image_name = (element_to_delete[INDEX_COLUMN_NAME])
+    untagged_images = set()
+    want_wret_to_del = {}
+    for element_to_untag in no_deleted:
+        for element_to_delete in to_be_delete:
+
+            create_time = element_to_delete[INDEX_COLUMN_TIME_CREATE]
+            image_name = element_to_delete[INDEX_COLUMN_NAME]
             data_to_write = "{} {}\n".format(create_time, image_name)
-            if element_to_delete[1].strip().lower() == element_to_untag[1].strip().lower():
+
+            hash_element_to_delete = str(element_to_delete[1]).strip().lower()
+            hash_element_to_untag = str(element_to_untag[1]).strip().lower()
+
+            if hash_element_to_delete == hash_element_to_untag:
                 with open("untag_image.txt", "a+") as file_to_write:
                     file_to_write.write(data_to_write)
-            else:
-                with open("del_image.txt", "a+") as file_to_write:
-                    file_to_write.write(data_to_write)
-            break
+                    untagged_images.add(hash_element_to_untag)
+
+            elif hash_element_to_delete not in untagged_images:
+                want_wret_to_del[hash_element_to_delete] = data_to_write
+
+    with open("del_image.txt", "a+") as file_to_write:
+        for key, value in want_wret_to_del.items():
+            if key in untagged_images:
+                continue
+
+            file_to_write.write(data_to_write)
 
 
 if __name__ == "__main__":
