@@ -1,6 +1,7 @@
 import argparse
 import io
 import sys
+import os
 
 from dateutil import parser
 
@@ -17,6 +18,10 @@ WIDE_DATA_PARSING_TEMPLATE = \
     "Start\n" \
     "  ^${created_time}\s+${digest}\s+${last_update_time}\s+${name}\s+${signed}.* -> Record\n"  # noqa
 
+if os.path.exists("untag_image.txt"):
+    os.remove("untag_image.txt")
+if os.path.exists("del_image.txt"):
+    os.remove("del_image.txt")
 
 INDEX_COLUMN_TIME_CREATE = 0
 INDEX_COLUMN_NAME = 3
