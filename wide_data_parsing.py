@@ -77,12 +77,12 @@ def main(data_to_be_sorted):
     for item in data_to_be_sorted[:abs(amount_remaining.q)]:
         no_deleted.append(item)
 
-    for item in to_be_delete:
-        for value in no_deleted:
-            create_time = (item[INDEX_COLUMN_TIME_CREATE])
-            image_name = (item[INDEX_COLUMN_NAME])
+    for element_to_delete in to_be_delete:
+        for element_to_untag in no_deleted:
+            create_time = (element_to_delete[INDEX_COLUMN_TIME_CREATE])
+            image_name = (element_to_delete[INDEX_COLUMN_NAME])
             data_to_write = "{} {}\n".format(create_time, image_name)
-            if item[1].strip().lower() == value[1].strip().lower():
+            if element_to_delete[1].strip().lower() == element_to_untag[1].strip().lower():
                 with open("untag_image.txt", "a+") as file_to_write:
                     file_to_write.write(data_to_write)
             else:
