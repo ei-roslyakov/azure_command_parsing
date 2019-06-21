@@ -102,7 +102,7 @@ def main(data_to_be_sorted):
             if key in untagged_images:
                 continue
 
-            file_to_write.write(data_to_write)
+            file_to_write.write(value)
 
 
 if __name__ == "__main__":
