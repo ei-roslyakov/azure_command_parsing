@@ -77,7 +77,7 @@ def main(data_to_be_sorted):
             create_time = (item[INDEX_COLUMN_TIME_CREATE])
             image_name = (item[INDEX_COLUMN_NAME])
             data_to_write = "{} {}\n".format(create_time, image_name)
-            if item[1] == value[1]:
+            if item[1].strip().lower() == value[1].strip().lower():
                 with open("untag_image.txt", "a+") as file_to_write:
                     file_to_write.write(data_to_write)
             else:
