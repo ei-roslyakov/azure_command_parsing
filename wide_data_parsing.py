@@ -102,6 +102,5 @@ def main(data_to_be_sorted):
                 already_deleted_images.add(hash_element_to_delete)
 
 
-
 if __name__ == "__main__":
     main(parse_data())
